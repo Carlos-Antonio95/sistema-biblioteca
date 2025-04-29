@@ -93,7 +93,7 @@ public class cliente {
 
     @Override
     public String toString() {
-        return "Cliente [nome=" + nome + ", cpf=" + cpf + ", endereço=" + endereço + ", telefone=" + telefone
-                + ", email=" + email + "]";
+        return "Cliente nome=" + nome + ", \ncpf=" + cpf + ", \nendereço=" + endereço + ", \ntelefone=" + telefone
+                + ", \nemail=" + email + "\nquantidadelivros=" + quantidadelivros + ", \nlivrosEmprestados=" + livrosEmprestados;
     }
 }

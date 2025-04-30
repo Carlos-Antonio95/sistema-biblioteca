@@ -1,7 +1,9 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class cliente {
+public class Cliente {
     private String nome;
     private int cpf;
     private String endereço;
@@ -9,9 +11,11 @@ public class cliente {
     private String email;
     private int quantidadelivros = 0;
     private List<String> livrosEmprestados = new ArrayList<>();
+    private Livro livro;
+    private Midia midia;
 
     // Construtor
-    public cliente(String nome, int cpf, String endereço, int telefone, String email) {
+    public Cliente(String nome, int cpf, String endereço, int telefone, String email) {
         this.nome = nome;
         this.cpf = cpf;
         this.endereço = endereço;
@@ -59,6 +63,7 @@ public class cliente {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     // Método para emprestar um livro
     public void emprestarLivro(String livro) {

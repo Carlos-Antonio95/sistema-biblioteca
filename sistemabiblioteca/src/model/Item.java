@@ -12,9 +12,9 @@ public abstract class Item implements itemBiblioteca{
     //Contrutor
     public Item(String titulo, LocalDate dataDePublicacao, int exemplaresDisponiveis, String categoria ){
         this.setTitulo(titulo);
-        this.dataDePublicacao = dataDePublicacao;
-        this.exemplaresDisponiveis = exemplaresDisponiveis;
-        this.categoria = categoria;
+        this.setDataDePublicacao(dataDePublicacao);
+        this.setExemplaresDisponiveis(exemplaresDisponiveis);
+        this.setCategoria(categoria);
     }
 
    //Métodos acessores 
@@ -35,23 +35,41 @@ public abstract class Item implements itemBiblioteca{
         return dataDePublicacao;
     }
 
+    //verifica se a data de publicação passada no parametro é igual ou inferior a data atual
     public void setDataDePublicacao(LocalDate dataDePublicacao) {
-        this.dataDePublicacao = dataDePublicacao;
+        if(dataDePublicacao.isEqual(LocalDate.now()) || dataDePublicacao.isBefore(LocalDate.now())){
+            this.dataDePublicacao = dataDePublicacao;
+        }else{
+            throw new IllegalArgumentException("Data de publicação não pode ser superior a data de "+ LocalDate.now());
+        }
+        
     }
     public int getExemplaresDisponiveis() {
         return exemplaresDisponiveis;
     }
 
+    //impede que exemplares disponveis sejam vazios
     public void setExemplaresDisponiveis(int exemplaresDisponiveis) {
-        this.exemplaresDisponiveis = exemplaresDisponiveis;
+        if(exemplaresDisponiveis >= 0){
+            this.exemplaresDisponiveis = exemplaresDisponiveis;
+        }else{
+            throw  new IllegalArgumentException("Quantidade exemplares disponveis não pode ser negativo");
+        }
+       
     }
 
     public String getCategoria() {
         return categoria;
     }
 
+    //Impede que seja setada uma categoria nulla/vazia
     public void setCategoria(String categoria) {
-        this.categoria = categoria;
+        if (categoria != null && !categoria.isEmpty()) {
+            this.categoria = categoria;
+        } else {
+            throw new IllegalArgumentException("Categoria não pode ser nullo");
+        }
+        
     }
 
      //Métodos abstratos serão implementados nas classes filhas
@@ -65,42 +83,7 @@ public abstract class Item implements itemBiblioteca{
         return "Item [titulo=" + titulo + ", dataDePublicacao=" + dataDePublicacao + ", exemplaresDisponiveis="
                 + exemplaresDisponiveis + ", categoria=" + categoria + "]";
      }
- 
 
-    public LocalDate getDataDePublicacao() {
-        return dataDePublicacao;
-    }
-
-    public void setDataDePublicacao(LocalDate dataDePublicacao) {
-        this.dataDePublicacao = dataDePublicacao;
-    }
-    public int getExemplaresDisponiveis() {
-        return exemplaresDisponiveis;
-    }
-
-    public void setExemplaresDisponiveis(int exemplaresDisponiveis) {
-        this.exemplaresDisponiveis = exemplaresDisponiveis;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-     //Métodos abstratos serão implementados nas classes filhas
-     @Override
-     public abstract void devolver();
-     @Override
-     public abstract void emprestar();
-
-     @Override
-     public String toString() {
-        return "Item [titulo=" + titulo + ", dataDePublicacao=" + dataDePublicacao + ", exemplaresDisponiveis="
-                + exemplaresDisponiveis + ", categoria=" + categoria + "]";
-     }
  
 
 }

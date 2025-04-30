@@ -67,4 +67,40 @@ public abstract class Item implements itemBiblioteca{
      }
  
 
+    public LocalDate getDataDePublicacao() {
+        return dataDePublicacao;
+    }
+
+    public void setDataDePublicacao(LocalDate dataDePublicacao) {
+        this.dataDePublicacao = dataDePublicacao;
+    }
+    public int getExemplaresDisponiveis() {
+        return exemplaresDisponiveis;
+    }
+
+    public void setExemplaresDisponiveis(int exemplaresDisponiveis) {
+        this.exemplaresDisponiveis = exemplaresDisponiveis;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+     //Métodos abstratos serão implementados nas classes filhas
+     @Override
+     public abstract void devolver();
+     @Override
+     public abstract void emprestar();
+
+     @Override
+     public String toString() {
+        return "Item [titulo=" + titulo + ", dataDePublicacao=" + dataDePublicacao + ", exemplaresDisponiveis="
+                + exemplaresDisponiveis + ", categoria=" + categoria + "]";
+     }
+ 
+
 }

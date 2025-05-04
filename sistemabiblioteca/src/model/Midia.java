@@ -29,8 +29,8 @@ public class Midia extends  Item {
     //Método emprestar Midia
     public boolean emprestarItem(){
         if(getExemplaresDisponiveis() > 0){
-            emprestar();//decrementa um livro
-            return true; //livro emprestado com sucesso
+            emprestar();//decrementa um mídia
+            return true; //mídia emprestado com sucesso
         }else{
             System.out.println("ERRO: Não a exemplares dispinveis para o Midia: "+getTitulo());
             return false;// Não ha exemplares disponiveis

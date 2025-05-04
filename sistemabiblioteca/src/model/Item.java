@@ -18,7 +18,7 @@ public abstract class Item implements itemBiblioteca{
         this.setDataDePublicacao(dataDePublicacao);
         this.setExemplaresDisponiveis(exemplaresDisponiveis);
         this.setCategoria(categoria);
-        this.livrosDisponiveis.add(titulo);
+        this.livrosDisponiveis.add(titulo);//adiciona o titulo do livro a lista
     }
 
    //Métodos acessores 

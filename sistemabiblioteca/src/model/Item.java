@@ -1,6 +1,8 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Item implements itemBiblioteca{
     //Atributos
@@ -8,6 +10,7 @@ public abstract class Item implements itemBiblioteca{
     private LocalDate dataDePublicacao;
     private int exemplaresDisponiveis;
     private String categoria;
+    private static List<String> livrosDisponiveis = new ArrayList<>();
 
     //Contrutor
     public Item(String titulo, LocalDate dataDePublicacao, int exemplaresDisponiveis, String categoria ){
@@ -15,9 +18,15 @@ public abstract class Item implements itemBiblioteca{
         this.setDataDePublicacao(dataDePublicacao);
         this.setExemplaresDisponiveis(exemplaresDisponiveis);
         this.setCategoria(categoria);
+        this.livrosDisponiveis.add(titulo);
     }
 
    //Métodos acessores 
+
+   public List<String> getLvivrosDisponveis(){
+        return livrosDisponiveis;
+   }
+   
     public String getTitulo() {
         return titulo;
     }
@@ -46,6 +55,7 @@ public abstract class Item implements itemBiblioteca{
     }
     public int getExemplaresDisponiveis() {
         return exemplaresDisponiveis;
+        //
     }
 
     //impede que exemplares disponveis sejam vazios

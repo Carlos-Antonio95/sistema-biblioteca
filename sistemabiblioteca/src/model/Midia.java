@@ -21,9 +21,20 @@ public class Midia extends  Item {
         if (diretor != null && !diretor.isEmpty()) {
             this.diretor = diretor;
         } else {
-            throw new IllegalArgumentException("Diretor não pode ser nullo/vazio");
+            throw new IllegalArgumentException("Diretor nÃ£o pode ser nullo/vazio");
         }
        
+    }
+
+    //MÃ©todo emprestar Midia
+    public boolean emprestarItem(){
+        if(getExemplaresDisponiveis() > 0){
+            emprestar();//decrementa um livro
+            return true; //livro emprestado com sucesso
+        }else{
+            System.out.println("ERRO: NÃ£o a exemplares dispinveis para o Midia: "+getTitulo());
+            return false;// NÃ£o ha exemplares disponiveis
+        }
     }
 
     @Override
@@ -39,11 +50,11 @@ public class Midia extends  Item {
 
     @Override
     public String toString() {
-        return "Informações da Midia:\n"
-             + "Título: " + getTitulo() + "\n"
+        return "InformÃ§Ãµes da Midia:\n"
+             + "TÃ­tulo: " + getTitulo() + "\n"
              + "Autor: " + getDiretor() + "\n"
-             + "Data de Publicação: " + getDataDePublicacao() + "\n"
+             + "Data de PublicaÃ§ao: " + getDataDePublicacao() + "\n"
              + "Categoria: " + getCategoria() + "\n"
-             + "Exemplares Disponíveis: " + getExemplaresDisponiveis();
+             + "Exemplares DisponÃ­veis: " + getExemplaresDisponiveis();
     }
 }

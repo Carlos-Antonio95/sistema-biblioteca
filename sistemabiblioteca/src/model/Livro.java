@@ -24,6 +24,16 @@ public class Livro extends Item {
         
     }
 
+    //Método emprestar livro
+    public boolean emprestarItem(){
+        if(getExemplaresDisponiveis() > 0){
+            emprestar();//decrementa um livro
+            return true; //livro emprestado com sucesso
+        }else{
+            System.out.println("ERRO: Não a exemplares dispinveis para o livro: "+getTitulo());
+            return false;// Não ha exemplares disponiveis
+        }
+    }
     
     @Override
     public void devolver() {

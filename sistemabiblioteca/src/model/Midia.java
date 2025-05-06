@@ -10,6 +10,8 @@ public class Midia extends  Item {
             String diretor) {
         super(titulo, dataDePublicacao, exemplaresDisponiveis, categoria);
         this.setDiretor(diretor);
+        Biblioteca  biblioteca = new Biblioteca();
+        biblioteca.adicionarMidiaLista(this);
     }
 
 
@@ -36,7 +38,8 @@ public class Midia extends  Item {
             return false;// Não ha exemplares disponiveis
         }
     }
-
+    
+   
     @Override
     public void devolver() {
         this.setExemplaresDisponiveis(getExemplaresDisponiveis() + 1);

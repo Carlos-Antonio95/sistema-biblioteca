@@ -10,7 +10,7 @@ public class Cliente {
     private int telefone;
     private String email;
     private int quantidadelivros = 0;
-    private List<String> livrosEmprestados = new ArrayList<>();
+    private List<Livro> livrosEmprestados = new ArrayList<>();
     private Livro livro;
     private Midia midia;
 
@@ -66,18 +66,18 @@ public class Cliente {
 
 
     // Método para emprestar um livro
-    public void emprestarLivro(String livro) {
+    public void emprestarLivro(Livro livro) {
         if (livrosEmprestados.contains(livro)) {
             System.out.println("Erro: O livro \"" + livro + "\" já foi emprestado para " + nome + ".");
         } else {
             livrosEmprestados.add(livro);
-            System.out.println("O livro \"" + livro + "\" foi emprestado para " + nome + ".");
+            System.out.println("O livro \"" + livro.getTitulo() + "\" foi emprestado para " + nome + ".");
             quantidadelivros++;
         }
     }
 
     // Método para devolver um livro
-    public void devolverLivro(String livro) {
+    public void devolverLivro(Livro livro) {
         if (!livrosEmprestados.contains(livro)) {
             System.out.println("Erro: O livro \"" + livro + "\" não está emprestado para " + nome + ".");
         } else {

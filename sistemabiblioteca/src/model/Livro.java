@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import model.Biblioteca;
 
 public class Livro extends Item {
 
@@ -9,6 +10,9 @@ public class Livro extends Item {
     public Livro(String titulo, LocalDate dataDePublicacao, int exemplaresDisponiveis, String categoria, String autor) {
         super(titulo, dataDePublicacao, exemplaresDisponiveis, categoria);
         this.setAutor(autor);
+        Biblioteca biblioteca = new Biblioteca();
+        biblioteca.adicionarLivrosLista(this);
+        
     }
 
     public String getAutor() {
@@ -34,6 +38,7 @@ public class Livro extends Item {
             return false;// Não ha exemplares disponiveis
         }
     }
+
     
     @Override
     public void devolver() {

@@ -39,7 +39,7 @@ public class Livro extends Item {
         }
     }
 
-    
+
     @Override
     public void devolver() {
         this.setExemplaresDisponiveis(getExemplaresDisponiveis() + 1);

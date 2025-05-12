@@ -8,9 +8,9 @@ import java.util.List;
  */
 public class Cliente {
     private String nome;
-    private int cpf;
+    private String cpf;
     private String endereço;
-    private int telefone;
+    private String telefone;
     private String email;
     private List<Livro> livrosEmprestados = new ArrayList<>();
     private List<Midia> midiasEmprestadas = new ArrayList<>();
@@ -22,7 +22,7 @@ public class Cliente {
     }
 
     // Construtor registra automaticamente na biblioteca singleton
-    public Cliente(String nome, int cpf, String endereço, int telefone, String email) {
+    public Cliente(String nome, String cpf, String endereço, String telefone, String email) {
         this.nome = nome;
         this.cpf = cpf;
         this.endereço = endereço;
@@ -142,11 +142,11 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -158,11 +158,11 @@ public class Cliente {
         this.endereço = endereço;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 

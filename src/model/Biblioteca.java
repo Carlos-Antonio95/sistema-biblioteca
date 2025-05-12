@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * relizara remoção de clientes, de livros e midias do banco de dados. chamara o emprestimo para ser realizado e na devolução calculara a multa.
 */
 public class Biblioteca {
-
+    private Emprestimo emprestimo;
      // Singleton
     private static final Biblioteca instancia = new Biblioteca();
     public static Biblioteca getInstancia() { return instancia; }
@@ -17,6 +18,9 @@ public class Biblioteca {
     private List<Midia> listaMidias = new ArrayList<>();
     private List<Emprestimo> listaEmprestimosLivros = new ArrayList<>();
     private List<Emprestimo> listaEmprestimosMidia  = new ArrayList<>();
+    private List<Emprestimo> listaEmprestimosLivrosDevolvidas = new ArrayList<>();
+    private List<Emprestimo> listaEmprestimosMidiaDevolvidas  = new ArrayList<>();
+
 
     public List<Cliente> getListaClientes() {
         return listaClientes;
@@ -180,35 +184,22 @@ public class Biblioteca {
             }
         }
     }
-
+    /**
+     * Método remover cliente por cpf
+     * @param cpf cpf do cliente
+     * @return true ou false
+     */
+    public boolean removerClientePorCpf(String cpf) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getCpf().equals(cpf)) {
+                listaClientes.remove(cliente);
+                return true; // Sucesso
+            }
+        }
+        return false; // Não encontrado
+    }
     
-    //Método emprestatar livro ta em construção ainda
-    public void emprestarItem(Cliente cliente, Livro livro){
-        if (livro.emprestarItem()) {//Verifica se o livro disponvel se tiver realiza o emprestimo
-            cliente.emprestarLivro(livro);//chama o método de emprestar 
-            
-        }
-    }
-
-    //Método emprestar Midia ta em construção ainda
-    public void emprestarItem(Cliente cliente, Midia midia){
-        if (midia.emprestarItem()) {//Verifica se o livro disponvel se tiver realiza o emprestimo
-            cliente.emprestarMidia(midia);//chama o método de emprestar 
-            
-        }
-    } 
-
-    //ta em construção ainda
-    public void devolverItem(Cliente cliente, Livro livro){
-        livro.devolver();
-        cliente.devolverLivro(livro);
-    }
-
-    //ta em contrução ainda
-    public void devolverItem(Cliente cliente, Midia midia){
-        midia.devolver();
-        cliente.devolverMidia(midia);
-    }
+  
 
 }
 

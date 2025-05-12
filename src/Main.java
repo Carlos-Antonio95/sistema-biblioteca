@@ -14,7 +14,6 @@ public class Main {
         sistema.definirTempoPadraoEmprestimo(5);
         sistema.definirValorMulta(5.0);
         List<Emprestimo> emprestimos = new ArrayList<>();
-        Emprestimo emprestimo = null;
         Biblioteca biblioteca = new Biblioteca();
         List <Livro> livros = new ArrayList<>();
         List <Midia> midias = new ArrayList<>();
@@ -25,21 +24,34 @@ public class Main {
         livros.add(new Livro("Javinha", LocalDate.of(2024,01,01), 5, "Teste", "Novo"));
          livros.add(new Livro("Python na veia", LocalDate.of(2024,01,01), 5, "Teste", "Novo"));
          livros.add(new Livro("Python ", LocalDate.of(2024,01,01), 5, "Teste", "Novo"));
-         midias.add(new Midia("titulo", LocalDate.of(2024,01,01), 2, "categoria", "diretor"));
+         midias.add(new Midia("titsdasdaulo", LocalDate.of(2024,01,01), 2, "categoria", "diretor"));
+           midias.add(new Midia("testeee", LocalDate.of(2024,01,01), 2, "categoria", "diretor"));
+
          emprestimos.add(new Emprestimo(cliente, midias.get(0), LocalDate.now()));
+         emprestimos.add(new Emprestimo(cliente, midias.get(1), LocalDate.now()));
+         Biblioteca.getInstancia().listarTodosOsClientes();
+         emprestimos.get(0).devolverItem(cliente,emprestimos.get(0), midias.get(0), LocalDate.of(2025, 5, 21));
+         //Biblioteca.getInstancia().emprestarItem(cliente, midias.get(0));
+
+
+
          //emprestimos.add(new Emprestimo(cliente, livros.get(0),LocalDate.now()));
          //System.out.println(emprestimos.get(0).devolverItem(cliente, emprestimos.get(0), midias.get(0)));
         // System.out.println(midias.get(0).getExemplaresDisponiveis());
-       // Biblioteca.getInstancia().listarTodosOsClientes();
+        Biblioteca.getInstancia().listarTodosOsClientes();
         //Biblioteca.getInstancia().listarTodosOsLivros();
-        //Biblioteca.getInstancia().listarTodosEmprestimoMidia();
+        Biblioteca.getInstancia().listarTodosEmprestimoMidia();
+       // Biblioteca.getInstancia().emprestarItem(cliente, midias.get(0));
         //Biblioteca.getInstancia().listarTodasAsMidias();
         //System.out.println(emprestimos.getDataPrevistaDevolucao());
       // Biblioteca.getInstancia().listaTodosEmprestimoLivro();
        //System.out.println(livros.get(0).getExemplaresDisponiveis());
-       System.out.println(midias.get(0).getExemplaresDisponiveis());
-       System.out.println(emprestimos.get(0).devolverItem(cliente, emprestimos.get(0), midias.get(0)));
-       System.out.println(midias.get(0).getExemplaresDisponiveis());
+      // System.out.println(midias.get(0).getExemplaresDisponiveis());
+       //System.out.println(emprestimos.get(0).devolverItem(cliente, emprestimos.get(0), midias.get(0)));
+       //System.out.println(midias.get(0).getExemplaresDisponiveis());
+      // Biblioteca.getInstancia().listarTodosEmprestimoMidia();
+
+
       
        
         

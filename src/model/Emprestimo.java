@@ -137,6 +137,7 @@ public class Emprestimo {
            // LocalDate dataHoje = LocalDate.now();//LocalDate.now() pega a data do computador e vai inseir
             //Emprestimo emprestimo = new Emprestimo(cliente, midia, dataHoje);//pega os paramentros ja passado no método principal e a data de hoje para criar o emprestimo(objeto)
            // LocalDate prevista = emprestimo.getDataPrevistaDevolucao();
+           System.out.println("Emprestimo realizado");
         } else {
             System.out.println("Emprestimo não realizado");
         }
@@ -149,7 +150,7 @@ public class Emprestimo {
        * @param midia midia que foi emprestada
        * @return retorna true se foi devolvido
        */
-        public boolean devolverItem(Cliente cliente, Emprestimo emprestimo,Midia midia){
+        public boolean devolverItem(Cliente cliente, Emprestimo emprestimo,Midia midia,LocalDate dataDevolucao){
             if(!Biblioteca.getInstancia().getListaClientes().contains(cliente)){
                 throw  new IllegalArgumentException("Cliente invalido!");
             }
@@ -160,8 +161,9 @@ public class Emprestimo {
                 throw new IllegalArgumentException("Midia invalida");
             }if(cliente.devolverMidia(midia)){
                 midia.devolver();
-                Biblioteca.getInstancia().removerEmprestimoMidiaLista(emprestimo);
-                emprestimo.setDataDevolucao(LocalDate.now());
+                //Biblioteca.getInstancia().removerEmprestimoMidiaLista(emprestimo);
+                emprestimo.calcularMulta(dataDevolucao);
+                emprestimo.setDataDevolucao(dataDevolucao);
                 System.out.println("a Midia: "+midia.getTitulo()+" foi devolvida por: "+cliente.getNome());
                 return true;
             }
@@ -185,9 +187,9 @@ public class Emprestimo {
             if(!Biblioteca.getInstancia().getListaLivros().contains(livro)){
                 throw new IllegalArgumentException("Midia invalida");
             }if(cliente.devolverLivro(livro)){
-                midia.devolver();
-                Biblioteca.getInstancia().removerEmprestimoLivroLista(emprestimo);
-                emprestimo.setDataDevolucao(LocalDate.now());
+                livro.devolver();
+                //Biblioteca.getInstancia().removerEmprestimoLivroLista(emprestimo);
+                setDataDevolucao(LocalDate.now());
                 System.out.println("a Livro: "+midia.getTitulo()+" foi devolvida por: "+cliente.getNome());
                 return true;
             }
@@ -203,9 +205,9 @@ public class Emprestimo {
        * @param dataDevolucao data que foi devolvido
        * @return retornar a direfença entre as duas datas(dias)
        */
-    public long calcularDiasEmprestimo(LocalDate dataEmprestimo, LocalDate dataDevolucao) {
-        if (dataEmprestimo != null && dataDevolucao != null) {
-            return ChronoUnit.DAYS.between(dataEmprestimo, dataDevolucao);
+    public long calcularDiasEmprestimo(LocalDate dataDevolucao) {
+        if (this.getDataEmprestimo() != null && dataDevolucao != null) {
+            return ChronoUnit.DAYS.between(this.getDataEmprestimo(), dataDevolucao);
         } else {
             throw new IllegalStateException("Datas de empréstimo e devolução devem estar definidas.");
 
@@ -230,18 +232,18 @@ public class Emprestimo {
      * @param dataDevolucao data de devolução do emprestimo
      * @return retonra o valor da multa caso tenha
      */
-    public double calcularMulta(LocalDate dataEmprestimo, LocalDate dataDevolucao) {
+    public double calcularMulta(LocalDate dataDevolucao) {
         if (Sistema.getInstancia().getMaximoEmprestimos() == null) {
             throw new IllegalArgumentException("Valores do sistema não pode ser nullo");
         }
-        if (dataEmprestimo == null) {
+        if (this.getDataEmprestimo() == null) {
             throw new IllegalStateException("Data de empréstimo não foi definida.");
         }
         if (dataDevolucao == null) {
             throw new IllegalArgumentException("Data de devolução não pode ser nula.");
         }
 
-        long dias = calcularDiasEmprestimo(dataEmprestimo, dataDevolucao);
+        long dias = calcularDiasEmprestimo(dataDevolucao);
         long diasExcedentes = dias - Sistema.getInstancia().getTempoPadraoEmprestimo();
 
         if (diasExcedentes > 0) {
@@ -264,7 +266,6 @@ public class Emprestimo {
         + "Data Prevista de Devolução: " + dataPrevistaDevolucao + "\n"
         + "Data da Devolução: " + (dataDevolucao != null ? dataDevolucao : "Ainda não devolvido");
     }
-
 
 
 }

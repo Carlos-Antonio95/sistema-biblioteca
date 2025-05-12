@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Classe Sistema, responsavel pera regra de négocio, definindo regras como: tempo de emprestimo, valor multa e quantidade maxima de emprestimo por item
+ */
 public class Sistema implements Configuravel {
 
     private static Sistema instancia;

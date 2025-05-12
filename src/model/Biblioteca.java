@@ -3,7 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**dsad */
+/**Classe biblioteca, sera responsavel para ligar todas as outras classes, toda a listagem e sera o intermediador para realizar os emprestimos
+*/
 public class Biblioteca {
 
      // Singleton

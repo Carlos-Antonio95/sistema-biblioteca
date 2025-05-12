@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-//Atributos
+/**
+ * Classe emprestimo, responsavel por realizar os emprestimos, com datas e fazer toda a junção dos outros métodos ja existentes assimr realizando o emprestimo
+ */
 public class Emprestimo {
     private Cliente cliente;
     private Livro livro;

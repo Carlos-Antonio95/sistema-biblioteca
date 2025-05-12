@@ -3,6 +3,9 @@ package model;
 import java.time.LocalDate;
 import model.Biblioteca;
 
+/**
+ * Classe Livro contem todas as infromações sobre o livro
+ */
 public class Livro extends Item {
 
     private String autor;

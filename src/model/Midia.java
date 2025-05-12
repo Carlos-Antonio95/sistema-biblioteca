@@ -2,6 +2,9 @@ package model;
 
 import java.time.LocalDate;
 
+/**
+ * Classe midia contem todas as inormações sobre a midia
+ */
 public class Midia extends  Item {
     
     private String diretor;

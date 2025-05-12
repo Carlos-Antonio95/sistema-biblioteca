@@ -117,6 +117,19 @@ public class Biblioteca {
         }
     }
 
+    public void listarTodosEmprestimoMidia(){
+        if(listaEmprestimosMidia.isEmpty()){
+            System.out.println("Não há empréstimos de midia na biblioteca.");
+        }else{
+            System.out.println("=== Empréstimos de Midias ===");
+            for (Emprestimo e : listaEmprestimosMidia) {
+                System.out.println(e);
+                System.out.println("----------------------------------");
+                
+            }
+        }
+    }
+
     
     //Método emprestatar livro
     public void emprestarItem(Cliente cliente, Livro livro){

@@ -30,6 +30,7 @@ public class Emprestimo {
         this.setLivro(livro);
         this.setDataEmprestimo(dataEmprestimo);
         this.getDataPrevistaDevolucao();
+        this.listaEmprestimoMidia.add(this);
         Biblioteca.getInstancia().adicionarEmprestimoLivroLista(this);
     }
 

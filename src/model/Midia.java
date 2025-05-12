@@ -34,6 +34,7 @@ public class Midia extends  Item {
         }else{
             throw  new IllegalArgumentException("ERRO: Não a exemplares dispinveis para o Midia: "+getTitulo());
         }
+        
     }
     
    

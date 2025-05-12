@@ -23,12 +23,12 @@ public class Main {
         livros.add(new Livro("Javinha", LocalDate.of(2024,01,01), 5, "Teste", "Novo"));
          livros.add(new Livro("Python na veia", LocalDate.of(2024,01,01), 5, "Teste", "Novo"));
          livros.add(new Livro("Python ", LocalDate.of(2024,01,01), 5, "Teste", "Novo"));
-         midias.add(new Midia("titulo", LocalDate.of(2024,01,01), 1, "categoria", "diretor"));
+         midias.add(new Midia("titulo", LocalDate.of(2024,01,01), 2, "categoria", "diretor"));
         emprestimos.emprestimoItem(cliente, livros.get(0));
         emprestimos.emprestimoItem(cliente, livros.get(1));
          emprestimos.emprestimoItem(cliente, livros.get(2));
          emprestimos.emprestimoItem(cliente, midias.get(0));
-         emprestimos.emprestimoItem(cliente, midias.get(0));
+         //emprestimos.emprestimoItem(cliente, midias.get(0));
         //emprestimos.emprestimoItem(cliente, livros.get(3));
        // System.out.println(emprestimos.emprestimoLivro(cliente, livros.get(1)));
       //  System.out.println(emprestimos.emprestimoLivro(cliente, livros.get(2)));
@@ -38,10 +38,11 @@ public class Main {
        // for (Emprestimo emprestimo : emprestimos) {
           //  System.out.println(emprestimo);
        // }
-        Biblioteca.getInstancia().listarTodosOsClientes();
+        //Biblioteca.getInstancia().listarTodosOsClientes();
        // Biblioteca.getInstancia().listarTodosOsLivros();
-        Biblioteca.getInstancia().listaTodosEmprestimoLivro();
+       // Biblioteca.getInstancia().listaTodosEmprestimoLivro();
       //  System.out.println(emprestimos.getDataPrevistaDevolucao());
+        Biblioteca.getInstancia().listarTodosEmprestimoMidia();
         
         
         

@@ -12,6 +12,7 @@ public class Cliente {
     private List<Livro> livrosEmprestados = new ArrayList<>();
     private List<Midia> midiasEmprestadas = new ArrayList<>();
     private List<String> nomesLivros = new ArrayList<>();
+    private List<String> nomesMidias = new ArrayList<>();
 
     public List<String> getNomesLivros() {
         return nomesLivros;
@@ -55,15 +56,16 @@ public class Cliente {
             throw new IllegalArgumentException(
                 "Cliente atingiu o limite de empréstimos permitidos de: " + max
             );
-        }
-        if (midiasEmprestadas.contains(midia)) {
+        }if (midiasEmprestadas.contains(midia)) {
             System.out.println( "Erro: A mídia \"" + midia.getTitulo() + "\" já foi emprestada para " + nome + ".");
             return false;
-        } else {
+        }if (midia.emprestarItem()){
             midiasEmprestadas.add(midia);
+            nomesMidias.add(midia.getTitulo());
            System.out.println( "A mídia \"" + midia.getTitulo() + "\" foi emprestada para " + nome + ".");
-           return true;
+          return true;
         }
+        return  false;
     }
 
     // Devolve livro e mídia…
@@ -94,7 +96,7 @@ public class Cliente {
         return livrosEmprestados;
     }
 
-    // toString legível, sem referências cíclicas
+    // toString
     @Override
     public String toString() {
         return "Informações do Cliente:\n" +
@@ -103,9 +105,10 @@ public class Cliente {
                "Endereço: " + getEndereço() + "\n"+
                "Telefone: " + getTelefone() + "\n" +
                "Email: " + getEmail() + "\n"+
-               "LivrosEmprestados: " + livrosEmprestados.size() +"\n"+
-               "{Titulo: "+getNomesLivros()+"}"+
-               "MidiasEmprestadas: " + midiasEmprestadas.size()+"\n";
+               "LivrosEmprestados: " + livrosEmprestados.size() +" "+
+               "Titulo: "+getNomesLivros()+" \n"+
+               "MidiasEmprestadas: " + midiasEmprestadas.size()+" "+
+               "Titulo: "+getNomesMidias()+" \n";
     }
 
     public String getNome() {
@@ -162,5 +165,9 @@ public class Cliente {
 
     public void setMidiasEmprestadas(List<Midia> midiasEmprestadas) {
         this.midiasEmprestadas = midiasEmprestadas;
+    }
+
+    public List<String> getNomesMidias() {
+        return nomesMidias;
     }
 }

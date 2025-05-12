@@ -165,6 +165,7 @@ public class Emprestimo {
          
           
      // Cálculo da multa com validações
+     /** */
     public double calcularMulta(LocalDate dataEmprestimo, LocalDate dataDevolucao) {
         if (Sistema.getInstancia().getMaximoEmprestimos() == null) {
             throw new IllegalArgumentException("Valores do sistema não pode ser nullo");

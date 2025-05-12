@@ -7,6 +7,11 @@ public class Sistema implements Configuravel {
     private Integer maximoEmprestimos;
     private Double valorMulta;
 
+
+    /**
+     * Método estatico para criar uma instacia do sitema.
+     * @return
+     */
     public static Sistema getInstancia() {
         if (instancia == null) {
             instancia = new Sistema();

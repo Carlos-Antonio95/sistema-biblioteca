@@ -26,7 +26,10 @@ public class Midia extends  Item {
        
     }
 
-    //Método emprestar Midia
+    /**
+     * Método para verificar se tem exemplares disponveis, caso exista decrementa 1
+     * @return retorna true caso tenha sido "emprestada"
+     */
     public boolean emprestarItem(){
         if(getExemplaresDisponiveis() > 0){
             emprestar();//decrementa um mídia

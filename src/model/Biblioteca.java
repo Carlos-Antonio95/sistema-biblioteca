@@ -56,19 +56,41 @@ public class Biblioteca {
         this.listaEmprestimosMidia = listaEmprestimosMidia;
     }
 
-    // Adiciona Cliente, Livro ou Mídia
+    /**
+     * Método para adicionar Clientes a Lista
+     * @param c o cliente
+     */
     public void adicionarClientesLista(Cliente c) { listaClientes.add(c); }
+    /**
+     * Método para adicionar livros a lista
+     * @param l o livro
+     */
     public void adicionarLivrosLista(Livro l)     { listaLivros.add(l); }
+    /**
+     * Método para adiocnar midia a lista
+     * @param m a midia
+     */
     public void adicionarMidiaLista(Midia m)      { listaMidias.add(m); }
 
-    // Adiciona empréstimos
+  
+    /**
+     * Método para adicionar emprestimos realizado de livros
+     * @param e o emprestimo(o objeto em si)
+     */
     public void adicionarEmprestimoLivroLista(Emprestimo e) { listaEmprestimosLivros.add(e); }
+    /**
+     * Método para adicionar emprestimos realizados de midias
+     * @param e o emprestimo(o objeto em si)
+     */
     public void adicionarEmprestimoMidiaLista(Emprestimo e) { listaEmprestimosMidia.add(e); }
 
 
 
     
-    // Listagens
+    /**
+     * Método que vai listar todos os clientes que existem na lista
+     * Vai printar o toString()
+     */
     public void listarTodosOsClientes() {
         if (listaClientes.isEmpty()) {
             System.out.println("Não há Clientes cadastrados na biblioteca.");
@@ -81,6 +103,10 @@ public class Biblioteca {
         }
     }
 
+    /**
+     * Método que vai listar todos os livros que existem
+     * Vai printar o toString();
+     */
     public void listarTodosOsLivros() {
         if (listaLivros.isEmpty()) {
             System.out.println("Não há livros cadastrados na biblioteca.");
@@ -93,6 +119,10 @@ public class Biblioteca {
         }
     }
 
+    /**
+     * Método que vai listar todos as midias que existem
+     * Vai printar o toString()
+     */
     public void listarTodasAsMidias() {
         if (listaMidias.isEmpty()) {
             System.out.println("Não há mídias cadastradas na biblioteca.");
@@ -105,6 +135,10 @@ public class Biblioteca {
         }
     }
 
+    /**
+     * Método que vai listar todos os emprestimos de livros
+     * printa os emprestimos -> toString() = de emprestimo
+     */
     public void listaTodosEmprestimoLivro() {
         if (listaEmprestimosLivros.isEmpty()) {
             System.out.println("Não há empréstimos de livro na biblioteca.");
@@ -117,6 +151,10 @@ public class Biblioteca {
         }
     }
 
+    /**
+     * Método que vai listar todos os emprestimos de midia
+     * printa os emprestimos -> toString() = de  emprestimo
+     */
     public void listarTodosEmprestimoMidia(){
         if(listaEmprestimosMidia.isEmpty()){
             System.out.println("Não há empréstimos de midia na biblioteca.");
@@ -131,7 +169,7 @@ public class Biblioteca {
     }
 
     
-    //Método emprestatar livro
+    //Método emprestatar livro ta em construção ainda
     public void emprestarItem(Cliente cliente, Livro livro){
         if (livro.emprestarItem()) {//Verifica se o livro disponvel se tiver realiza o emprestimo
             cliente.emprestarLivro(livro);//chama o método de emprestar 
@@ -139,7 +177,7 @@ public class Biblioteca {
         }
     }
 
-    //Método emprestar Midia
+    //Método emprestar Midia ta em construção ainda
     public void emprestarItem(Cliente cliente, Midia midia){
         if (midia.emprestarItem()) {//Verifica se o livro disponvel se tiver realiza o emprestimo
             cliente.emprestarMidia(midia);//chama o método de emprestar 
@@ -147,11 +185,13 @@ public class Biblioteca {
         }
     } 
 
+    //ta em construção ainda
     public void devolverItem(Cliente cliente, Livro livro){
         livro.devolver();
         cliente.devolverLivro(livro);
     }
 
+    //ta em contrução ainda
     public void devolverItem(Cliente cliente, Midia midia){
         midia.devolver();
         cliente.devolverMidia(midia);

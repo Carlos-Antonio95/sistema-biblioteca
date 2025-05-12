@@ -30,7 +30,10 @@ public class Livro extends Item {
         
     }
 
-    //Método emprestar livro
+    /**
+     * Método verefica se existem exemplares disponveis, caso exista ele decrementa em 1
+     * @return returna verdadero se "emprestar"
+     */
     public boolean emprestarItem(){
         if(getExemplaresDisponiveis() > 0){
             emprestar();//decrementa um livro
@@ -46,6 +49,7 @@ public class Livro extends Item {
         this.setExemplaresDisponiveis(getExemplaresDisponiveis() + 1);
     }
 
+   
     @Override
     public void emprestar() {
        this.setExemplaresDisponiveis(getExemplaresDisponiveis()- 1);

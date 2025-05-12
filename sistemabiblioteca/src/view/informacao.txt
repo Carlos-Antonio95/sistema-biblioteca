@@ -1,6 +1,0 @@
-?? view (Interface gráfica - GUI do sistema) 
- ? ??? TelaPrincipal.java (Menu principal do sistema) 
- ? ??? TelaCadastroLivro.java (Cadastro de livros) 
- ? ??? TelaCadastroCliente.java (Cadastro de clientes) 
- ? ??? TelaEmprestimo.java (Realizar empréstimo de livro) 
- ? ??? TelaDevolucao.java (Devolução de livro e cálculo de multa)

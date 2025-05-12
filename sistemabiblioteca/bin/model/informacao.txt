@@ -1,7 +1,0 @@
- 
- ?? model (Model - Representa os dados do sistema) 
- ? ??? Livro.java 
- ? ??? Cliente.java 
- ? ??? Emprestimo.java 
- ? ??? Sistema.java (implementa Configuravel) 
- ? ??? Configuravel.java (interface para configurações do sistema) 

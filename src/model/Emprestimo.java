@@ -74,13 +74,13 @@ public class Emprestimo {
     public LocalDate getDataEmprestimo() {
         return dataEmprestimo;
     }
-
+    //recebe data de emprestimo setada(set) e ja define a data prevista de devolução(set())
     public void setDataEmprestimo(LocalDate dataEmprestimo) {
        LocalDate dataPrevistaDevolucao;
         if (dataEmprestimo != null){
             this.dataEmprestimo = dataEmprestimo;
-            dataPrevistaDevolucao = dataEmprestimo.plusDays(Sistema.getInstancia().getTempoPadraoEmprestimo());
-            this.setDataPrevistaDevolocao(dataPrevistaDevolucao);
+            dataPrevistaDevolucao = dataEmprestimo.plusDays(Sistema.getInstancia().getTempoPadraoEmprestimo());//plusDays()soma a quantidade (de dias que esta no getTempoPadrãoEmprestimo())
+            this.setDataPrevistaDevolocao(dataPrevistaDevolucao);//ja insere a data de devolução prevista
             
 
         }else{
@@ -121,33 +121,47 @@ public class Emprestimo {
 
 
     }  
-    /* O método ChronoUnit.DAYS.between(dataEmprestimo, dataDevolucao) calcula a diferença em dias entre duas datas fornecidas 
-    (dataEmprestimo e dataDevolucao). Ele retorna um valor do tipo long, que representa o número de dias entre as duas datas.
-    */
+   
 
+    /**
+     * Método que emprestar livro, utiliza os métodos ja existntem em cliente e livro, porem ele ja cria um emprestimo adicionando infromações como data e previção de devolução
+     * @param cliente o cliente que ira fazer o emprestimo
+     * @param livro o livro que sera emprestado
+     */
     public static  void emprestimoItem(Cliente cliente, Livro livro){
         if(cliente.emprestarLivro(livro)){
             livro.emprestarItem();
-            LocalDate datahoje = LocalDate.now();
-            Emprestimo emprestimo = new Emprestimo(cliente, livro, datahoje);
+            LocalDate datahoje = LocalDate.now();//LocalDate.now() pega a data do computador e vai inseir
+            Emprestimo emprestimo = new Emprestimo(cliente, livro, datahoje);//pega os paramentros ja passado no método principal e a data de hoje para criar o emprestimo(objeto)
             LocalDate prevista = emprestimo.getDataPrevistaDevolucao();
         }else{
             System.out.println("Emprestimo não realizado");
         }
     }
 
-    
+    /**
+     * Método que emprestar midia, utiliza os métodos ja existntem em cliente e midia, porem ele ja cria um emprestimo adicionando infromações como data e previção de devolução
+     * @param cliente o cliente que ira fazer o emprestimo
+     * @param midia a midia que sera emprestado
+     */
     public static void emprestimoItem(Cliente cliente, Midia midia){
         if (cliente.emprestarMidia(midia)) {
             midia.emprestarItem();
-            LocalDate dataHoje = LocalDate.now();
-            Emprestimo emprestimo = new Emprestimo(cliente, midia, dataHoje);
+            LocalDate dataHoje = LocalDate.now();//LocalDate.now() pega a data do computador e vai inseir
+            Emprestimo emprestimo = new Emprestimo(cliente, midia, dataHoje);//pega os paramentros ja passado no método principal e a data de hoje para criar o emprestimo(objeto)
             LocalDate prevista = emprestimo.getDataPrevistaDevolucao();
         } else {
             System.out.println("Emprestimo não realizado");
         }
       }
 
+      /**
+       * Método que ira calcular os dias do emprestimo
+       *  O método ChronoUnit.DAYS.between, calcula a diferença em dias entre duas datas fornecidas Ele retorna um valor do tipo long, que representa o número de dias entre as duas datas.
+       * @param dataEmprestimo data que foi realizado o emprestimo
+       * @param dataDevolucao data que foi devolvido
+       * @return retornar a direfença entre as duas datas(dias)
+       */
     public long calcularDiasEmprestimo(LocalDate dataEmprestimo, LocalDate dataDevolucao) {
         if (dataEmprestimo != null && dataDevolucao != null) {
             return ChronoUnit.DAYS.between(dataEmprestimo, dataDevolucao);
@@ -157,6 +171,11 @@ public class Emprestimo {
         }
     }   
 
+    /**
+     * Método que retonar uma String informando a data  prevista para devolução
+     * @param dataemprestimo data do emprestimo
+     * @return data prevista para devolução
+     */
     public String dataPrevistaDevolucao(LocalDate dataemprestimo){
         LocalDate dataPrevistaDevolucao = dataemprestimo.plusDays(Sistema.getInstancia().getTempoPadraoEmprestimo());
         return "Data prevista para devolução: "+ dataPrevistaDevolucao;
@@ -164,8 +183,12 @@ public class Emprestimo {
 
          
           
-     // Cálculo da multa com validações
-     /** */
+    /**
+     * Método para calcular multa, faz todo tratamento de erro verificando valores nulos, calcula os dias emprestados, multiplica o pela multa caso tenha multa e retorna o valor da multa
+     * @param dataEmprestimo data de realização do emprestimo
+     * @param dataDevolucao data de devolução do emprestimo
+     * @return retonra o valor da multa caso tenha
+     */
     public double calcularMulta(LocalDate dataEmprestimo, LocalDate dataDevolucao) {
         if (Sistema.getInstancia().getMaximoEmprestimos() == null) {
             throw new IllegalArgumentException("Valores do sistema não pode ser nullo");

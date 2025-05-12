@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe cliente, contem todas as informações sobre o cliente, como nome,cpf, listas dos livros e midias emprestados, como também lista com apenas os nomes dos titulos
+ */
 public class Cliente {
     private String nome;
     private int cpf;
@@ -28,9 +31,11 @@ public class Cliente {
         Biblioteca.getInstancia().adicionarClientesLista(this);
     }
 
-    // … getters e setters omitidos para brevidade …
-
-    // Empresta livro (limite e duplicata)
+    /**
+     * Método para emprestar livro, verifica se respeita as regras do sistema sobre quantidade maxima de emprestimos e se o livro ja não esta emprestado para o mesmo, caso tudo esteja ok realiza emprestimo
+     * @param livro livro que sera emprestado
+     * @return retorna um true caso ocorra o emprestimo
+     */
     public boolean  emprestarLivro(Livro livro) {
         int max = Sistema.getInstancia().getMaximoEmprestimos();
         if (livrosEmprestados.size() >= max) {
@@ -49,7 +54,11 @@ public class Cliente {
         }
     }
 
-    // Empresta mídia (mesma lógica de livro)
+    /**
+     * Método para emprestar midia, verifica se respeita as regras do sistema sobre quantidade maxima de emprestimos e se o midia ja não esta emprestado para o mesmo, caso tudo esteja ok realiza emprestimo
+     * @param midia midia que sera emprestado
+     * @return retorna um true caso ocorra o emprestimo
+     */
     public boolean emprestarMidia(Midia midia) {
         int max = Sistema.getInstancia().getMaximoEmprestimos();
         if (midiasEmprestadas.size() >= max) {
@@ -67,8 +76,10 @@ public class Cliente {
         }
         return  false;
     }
-
-    // Devolve livro e mídia…
+    /**
+     * Método para devolver livro, retira o livro da lista de livros emprestados
+     * @param livro livro que sera retirado
+     */
     public void devolverLivro(Livro livro) {
         if (!livrosEmprestados.contains(livro)) {
             System.out.println("Erro: O livro \"" + livro + "\" não está emprestado para " + nome + ".");
@@ -78,6 +89,10 @@ public class Cliente {
         }
     }
 
+    /**
+     * Método para devovler midia, retira a midia da lista de emprestados
+     * @param midia midia que sera devolvida
+     */
     public void devolverMidia(Midia midia) {
         if (!livrosEmprestados.contains(midia)) {
             System.out.println("Erro: A midia \"" + midia + "\" não está emprestada para " + nome + ".");

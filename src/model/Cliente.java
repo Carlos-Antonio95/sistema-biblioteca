@@ -85,6 +85,7 @@ public class Cliente {
             System.out.println("Erro: O livro \"" + livro + "\" não está emprestado para " + nome + ".");
         } else {
             livrosEmprestados.remove(livro);
+            nomesLivros.remove(livro.getTitulo());
             System.out.println("O livro \"" + livro + "\" foi devolvido por " + nome + ".");
         }
     }
@@ -98,6 +99,7 @@ public class Cliente {
             System.out.println("Erro: A midia \"" + midia + "\" não está emprestada para " + nome + ".");
         } else {
             livrosEmprestados.remove(midia);
+            nomesLivros.remove(midia.getTitulo());
             System.out.println("A midia \"" + midia + "\" foi devolvida por " + nome + ".");
 
         }

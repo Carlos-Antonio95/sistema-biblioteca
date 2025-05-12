@@ -44,12 +44,13 @@ public class Cliente {
             );
         }
         if (livrosEmprestados.contains(livro)) {
-           System.out.println( "Erro: O livro \"" + livro.getTitulo() + "\" já foi emprestado para " + nome + ".");
+          // System.out.println( "Erro: O livro \"" + livro.getTitulo() + "\" já foi emprestado para " + nome + ".");
            return false;
         } else {
+            livro.emprestarItem();
             livrosEmprestados.add(livro);
             nomesLivros.add(livro.getTitulo());
-            System.out.println("O livro \"" + livro.getTitulo() + "\" foi emprestado para " + nome + ".");
+           // System.out.println("O livro \"" + livro.getTitulo() + "\" foi emprestado para " + nome + ".");
             return true;
         }
     }
@@ -66,27 +67,30 @@ public class Cliente {
                 "Cliente atingiu o limite de empréstimos permitidos de: " + max
             );
         }if (midiasEmprestadas.contains(midia)) {
-            System.out.println( "Erro: A mídia \"" + midia.getTitulo() + "\" já foi emprestada para " + nome + ".");
+           // System.out.println( "Erro: A mídia \"" + midia.getTitulo() + "\" já foi emprestada para " + nome + ".");
             return false;
-        }if (midia.emprestarItem()){
+        }else{
+            midia.emprestarItem();
             midiasEmprestadas.add(midia);
             nomesMidias.add(midia.getTitulo());
-           System.out.println( "A mídia \"" + midia.getTitulo() + "\" foi emprestada para " + nome + ".");
-          return true;
+           // System.out.println( "A mídia \"" + midia.getTitulo() + "\" foi emprestada para " + nome + ".");
+            return true;
         }
-        return  false;
+        
     }
     /**
      * Método para devolver livro, retira o livro da lista de livros emprestados
      * @param livro livro que sera retirado
      */
-    public void devolverLivro(Livro livro) {
+    public boolean  devolverLivro(Livro livro) {
         if (!livrosEmprestados.contains(livro)) {
-            System.out.println("Erro: O livro \"" + livro + "\" não está emprestado para " + nome + ".");
+           // System.out.println("Erro: O livro \"" + livro + "\" não está emprestado para " + nome + ".");
+           return false;
         } else {
             livrosEmprestados.remove(livro);
             nomesLivros.remove(livro.getTitulo());
-            System.out.println("O livro \"" + livro + "\" foi devolvido por " + nome + ".");
+            return true;
+           // System.out.println("O livro \"" + livro + "\" foi devolvido por " + nome + ".");
         }
     }
 
@@ -94,13 +98,15 @@ public class Cliente {
      * Método para devovler midia, retira a midia da lista de emprestados
      * @param midia midia que sera devolvida
      */
-    public void devolverMidia(Midia midia) {
-        if (!livrosEmprestados.contains(midia)) {
-            System.out.println("Erro: A midia \"" + midia + "\" não está emprestada para " + nome + ".");
+    public boolean devolverMidia(Midia midia) {
+        if (!midiasEmprestadas.contains(midia)) {
+           // System.out.println("Erro: A midia \"" + midia + "\" não está emprestada para " + nome + ".");
+           return false;
         } else {
-            livrosEmprestados.remove(midia);
-            nomesLivros.remove(midia.getTitulo());
-            System.out.println("A midia \"" + midia + "\" foi devolvida por " + nome + ".");
+            midiasEmprestadas.remove(midia);
+            nomesMidias.remove(midia.getTitulo());
+            return true;
+            //System.out.println("A midia \"" + midia + "\" foi devolvida por " + nome + ".");
 
         }
     }

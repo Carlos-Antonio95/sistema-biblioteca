@@ -14,25 +14,25 @@ public class Emprestimo {
     private LocalDate dataEmprestimo;
     private LocalDate dataPrevistaDevolucao;
     private LocalDate dataDevolucao;
-    private List<Emprestimo> listaEmprestimoLivro = new ArrayList<>();
-    private List<Emprestimo> listaEmprestimoMidia = new ArrayList<>();
 
+    public Emprestimo(){
+
+    }
     // Construtor
     public Emprestimo(Cliente cliente, Midia midia ,LocalDate dataEmprestimo) {
         this.setCliente(cliente);
         this.setMidia(midia);
         this.setDataEmprestimo(dataEmprestimo);
-        this.getDataPrevistaDevolucao();
-        this.listaEmprestimoMidia.add(this);
+        this.emprestimoItem(cliente, midia);
         Biblioteca.getInstancia().adicionarEmprestimoMidiaLista(this); 
+        
     }
 
      public Emprestimo(Cliente cliente, Livro livro ,LocalDate dataEmprestimo) {
         this.setCliente(cliente);
         this.setLivro(livro);
         this.setDataEmprestimo(dataEmprestimo);
-        this.getDataPrevistaDevolucao();
-        this.listaEmprestimoMidia.add(this);
+        this.emprestimoItem(cliente, livro);
         Biblioteca.getInstancia().adicionarEmprestimoLivroLista(this);
     }
 
@@ -109,20 +109,6 @@ public class Emprestimo {
         this.dataDevolucao = dataDevolucao;
     }
 
-    
-    public List<Emprestimo> getListaEmprestimoLivro() {
-        return listaEmprestimoLivro;
-    }
-
-    public List<Emprestimo> getListaEmprestimoMidia() {
-        return listaEmprestimoMidia;
-    }
-
-
-    public void realizarEmprestimo(Cliente cliente,Livro livro){
-
-
-    }  
    
 
     /**
@@ -130,12 +116,12 @@ public class Emprestimo {
      * @param cliente o cliente que ira fazer o emprestimo
      * @param livro o livro que sera emprestado
      */
-    public static  void emprestimoItem(Cliente cliente, Livro livro){
+    public  void emprestimoItem(Cliente cliente, Livro livro){
         if(cliente.emprestarLivro(livro)){
-            livro.emprestarItem();
-            LocalDate datahoje = LocalDate.now();//LocalDate.now() pega a data do computador e vai inseir
-            Emprestimo emprestimo = new Emprestimo(cliente, livro, datahoje);//pega os paramentros ja passado no método principal e a data de hoje para criar o emprestimo(objeto)
-            LocalDate prevista = emprestimo.getDataPrevistaDevolucao();
+
+            //LocalDate datahoje = LocalDate.now();//LocalDate.now() pega a data do computador e vai inseir
+            //Emprestimo emprestimo = new Emprestimo(cliente, livro, datahoje);//pega os paramentros ja passado no método principal e a data de hoje para criar o emprestimo(objeto)
+            //LocalDate prevista = emprestimo.getDataPrevistaDevolucao();
         }else{
             System.out.println("Emprestimo não realizado");
         }
@@ -146,16 +132,69 @@ public class Emprestimo {
      * @param cliente o cliente que ira fazer o emprestimo
      * @param midia a midia que sera emprestado
      */
-    public static void emprestimoItem(Cliente cliente, Midia midia){
+    public  void emprestimoItem(Cliente cliente, Midia midia){
         if (cliente.emprestarMidia(midia)) {
-            midia.emprestarItem();
-            LocalDate dataHoje = LocalDate.now();//LocalDate.now() pega a data do computador e vai inseir
-            Emprestimo emprestimo = new Emprestimo(cliente, midia, dataHoje);//pega os paramentros ja passado no método principal e a data de hoje para criar o emprestimo(objeto)
-            LocalDate prevista = emprestimo.getDataPrevistaDevolucao();
+           // LocalDate dataHoje = LocalDate.now();//LocalDate.now() pega a data do computador e vai inseir
+            //Emprestimo emprestimo = new Emprestimo(cliente, midia, dataHoje);//pega os paramentros ja passado no método principal e a data de hoje para criar o emprestimo(objeto)
+           // LocalDate prevista = emprestimo.getDataPrevistaDevolucao();
         } else {
             System.out.println("Emprestimo não realizado");
         }
       }
+
+      /**
+       * Método devolver midia faz as validações necessarias(se realmente existe emprestimo,cliente e midia)
+       * @param cliente cliente que possuio emprestimo
+       * @param emprestimo id do emprestimo(referencia na mémoria)
+       * @param midia midia que foi emprestada
+       * @return retorna true se foi devolvido
+       */
+        public boolean devolverItem(Cliente cliente, Emprestimo emprestimo,Midia midia){
+            if(!Biblioteca.getInstancia().getListaClientes().contains(cliente)){
+                throw  new IllegalArgumentException("Cliente invalido!");
+            }
+            if (!Biblioteca.getInstancia().getListaEmprestimosMidia().contains(emprestimo)) {
+                throw  new IllegalArgumentException("Emprestimo não encontrado");
+            }
+            if(!Biblioteca.getInstancia().getListaMidias().contains(midia)){
+                throw new IllegalArgumentException("Midia invalida");
+            }if(cliente.devolverMidia(midia)){
+                midia.devolver();
+                Biblioteca.getInstancia().removerEmprestimoMidiaLista(emprestimo);
+                emprestimo.setDataDevolucao(LocalDate.now());
+                System.out.println("a Midia: "+midia.getTitulo()+" foi devolvida por: "+cliente.getNome());
+                return true;
+            }
+            return false;
+        }
+
+        /**
+       * Método devolver livro faz as validações necessarias(se realmente existe emprestimo,cliente e livro)
+       * @param cliente cliente que possuio emprestimo
+       * @param emprestimo id do emprestimo(referencia na mémoria)
+       * @param midia livrp que foi emprestada
+       * @return retorna true se foi devolvido
+       */
+        public boolean devolverItem(Cliente cliente, Emprestimo emprestimo,Livro livro){
+            if(!Biblioteca.getInstancia().getListaClientes().contains(cliente)){
+                throw  new IllegalArgumentException("Cliente invalido!");
+            }
+            if (!Biblioteca.getInstancia().getListaEmprestimosLivros().contains(emprestimo)) {
+                throw  new IllegalArgumentException("Emprestimo não encontrado");
+            }
+            if(!Biblioteca.getInstancia().getListaLivros().contains(livro)){
+                throw new IllegalArgumentException("Midia invalida");
+            }if(cliente.devolverLivro(livro)){
+                midia.devolver();
+                Biblioteca.getInstancia().removerEmprestimoLivroLista(emprestimo);
+                emprestimo.setDataDevolucao(LocalDate.now());
+                System.out.println("a Livro: "+midia.getTitulo()+" foi devolvida por: "+cliente.getNome());
+                return true;
+            }
+            return false;
+        }
+
+      
 
       /**
        * Método que ira calcular os dias do emprestimo

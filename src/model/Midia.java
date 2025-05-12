@@ -62,6 +62,6 @@ public class Midia extends  Item {
              + "Autor: " + getDiretor() + "\n"
              + "Data de Publicaçao: " + getDataDePublicacao() + "\n"
              + "Categoria: " + getCategoria() + "\n"
-             + "Exemplares Disponíveis: " + getExemplaresDisponiveis();
+             + "Exemplares Disponíveis: " + getExemplaresDisponiveis()+"\n";
     }
 }

@@ -87,7 +87,17 @@ public class Biblioteca {
      */
     public void adicionarEmprestimoMidiaLista(Emprestimo e) { listaEmprestimosMidia.add(e); }
 
+    /**
+     * Método para remover a midia da lsita de emprestimos
+     * @param e o emprestimo(o objeto em si)
+     */
+    public void removerEmprestimoMidiaLista(Emprestimo e) { listaEmprestimosMidia.remove(e); }
 
+    /**
+     * Método para remover o livro da lista de emprestimos
+     * @param e o emprestimos(o objeto em si)
+     */
+    public void removerEmprestimoLivroLista(Emprestimo e) { listaEmprestimosLivros.remove(e); }
 
     
     /**
